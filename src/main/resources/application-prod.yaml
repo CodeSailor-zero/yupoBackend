@@ -34,7 +34,7 @@ server:
     context-path: /api
     session:
       cookie:
-        domain: 106.75.223.124
+        domain: localhost
         same-site: lax
         secure: false
 mybatis-plus:

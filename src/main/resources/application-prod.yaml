@@ -1,0 +1,55 @@
+spring:
+  mvc:
+    path match:
+      matching-strategy: ant_path_matcher
+
+  application:
+    name: yupao
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://lileicode.cn:3306/yup?characterEncoding=UTF-8
+    username: sean
+    password: 123456
+
+  session:
+    timeout: 86400
+    store-type: redis
+
+  redis:
+    port: 6379
+    host: localhost
+    database: 0
+    password: 123456
+
+  # 格式化全局时间字段
+  jackson:
+    date-format: yyyy-MM-dd
+    # 指定时间区域类型
+    time-zone: GMT+8
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+    session:
+      cookie:
+        domain: 106.75.223.124
+        same-site: lax
+        secure: false
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: false
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      logic-delete-field: isDelete
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+#OSS配置
+aliyun-oss:
+  endpoint: https://oss-cn-nanjing.aliyuncs.com
+  #  access-key-id: LTAI5tQCHtSG2Y4smUBR4yz9
+  #  access-key-secret: 1VC0fiDZe3NUchy96PeqR5grMljvgg
+  bucketName: upload-avatar-image

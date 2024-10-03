@@ -1,0 +1,72 @@
+#mybatis.mapper-locations=classpath:mappers/*xml
+#mybatis.type-aliases-package=com.sean.usercenter.mybatis.entity
+#server.port=8080
+
+spring:
+#  profiles:
+#    active: dev
+
+
+  application:
+    name: yupao
+
+  #数据库mysql的配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/yup?serverTimezone=GMT
+    username: sean
+    password: 123456
+
+  #session失效时间 (分钟)
+  session:
+    timeout: 86400
+    store-type: redis
+    redis:
+      namespace: spring:userSession
+
+
+  # redis的配置
+  redis:
+    port: 6379
+    host: localhost
+    database: 0
+    password: 123456
+
+  mvc:
+    path match:
+      matching-strategy: ant_path_matcher
+  # 格式化全局时间字段
+  jackson:
+    date-format: yyyy-MM-dd
+    # 指定时间区域类型
+    time-zone: GMT+8
+
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+    session:
+      cookie:
+        domain: localhost
+
+# mybatis-plus 的配置
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: false # 是否开启驼峰命名转换
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 是否开启查询语句的展示
+
+  global-config:
+    db-config:
+      logic-delete-field: isDelete # 全局逻辑删除的实体字段名(since 3.3.0,配置后可以忽略不配置步骤2)
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+
+#OSS配置
+aliyun-oss:
+  endpoint: https://oss-cn-nanjing.aliyuncs.com
+  #  access-key-id: LTAI5tQCHtSG2Y4smUBR4yz9
+  #  access-key-secret: 1VC0fiDZe3NUchy96PeqR5grMljvgg
+  bucketName: upload-avatar-image
+
+

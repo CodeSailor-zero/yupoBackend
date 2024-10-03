@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sean.usercenter.mapper.ChatMapper">
+
+    <resultMap id="BaseResultMap" type="com.sean.usercenter.model.DTO.Chat">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="fromId" column="fromId" jdbcType="BIGINT"/>
+        <result property="toId" column="toId" jdbcType="BIGINT"/>
+        <result property="text" column="text" jdbcType="VARCHAR"/>
+        <result property="chatType" column="chatType" jdbcType="TINYINT"/>
+        <result property="teamId" column="teamId" jdbcType="BIGINT"/>
+        <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="updateTime" jdbcType="TIMESTAMP"/>
+        <result property="isDelete" column="isDelete" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,fromId,toId,
+        text,chatType,teamId,TcreateTime,updateTime,isDelete
+    </sql>
+
+    <select id="getLastPrivateChatMessages" resultType="com.sean.usercenter.model.DTO.Chat">
+        SELECT c.*
+        FROM hjj.chat c
+        JOIN (
+        SELECT MAX(id) AS max_id
+        FROM hjj.chat
+        WHERE isDelete = 0
+        AND (fromId = #{userId} OR toId = #{userId})
+        AND toId IN
+        <foreach item="friendId" collection="friendIdList" open="(" separator="," close=")">
+            #{friendId}
+        </foreach>
+        GROUP BY toId
+        ) AS max_ids ON c.id = max_ids.max_id AND (c.fromId = #{userId} OR c.toId = #{userId})
+        order by createTime desc;
+    </select>
+</mapper>

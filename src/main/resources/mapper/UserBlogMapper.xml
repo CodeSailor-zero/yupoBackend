@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sean.usercenter.mapper.UserBlogMapper">
+
+    <resultMap id="BaseResultMap" type="com.sean.usercenter.model.DTO.UserBlog">
+            <result property="userId" column="userId" jdbcType="TINYINT"/>
+            <result property="blogId" column="blogId" jdbcType="TINYINT"/>
+            <result property="remark" column="remark" jdbcType="VARCHAR"/>
+            <result property="remarkNum" column="remarkNum" jdbcType="VARCHAR"/>
+            <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="updateTime" jdbcType="TIMESTAMP"/>
+            <result property="isDelete" column="isDelete" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        userId,blogId,
+        remark,remarkNum,
+        createTime,updateTime,isDelete
+    </sql>
+</mapper>

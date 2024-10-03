@@ -50,6 +50,4 @@ mybatis-plus:
 #OSS配置
 aliyun-oss:
   endpoint: https://oss-cn-nanjing.aliyuncs.com
-  #  access-key-id: LTAI5tQCHtSG2Y4smUBR4yz9
-  #  access-key-secret: 1VC0fiDZe3NUchy96PeqR5grMljvgg
   bucketName: upload-avatar-image
